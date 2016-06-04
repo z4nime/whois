@@ -1,0 +1,164 @@
+<!doctype html>
+<html ng-app="app">
+  <head>
+    <title>Whois.IO</title>
+    <style media="screen">
+      body {
+        font-family: Roboto, Arial, sans-serif;
+        background: #ECEFF1;
+        color: rgba(0,0,0,0.87);
+      }
+
+      a {
+        color: rgb(3,155,229);
+        text-decoration: none; 
+      }
+      a:hover{
+        text-decoration: none;
+      }
+      #message {
+        max-width: 800px;
+        margin: 40px auto;
+        box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2),0 1px 1px 0 rgba(0,0,0,0.14),0 2px 1px -1px rgba(0,0,0,0.12);
+        border-radius: 2px;
+        background: white;
+        padding: 16px 24px;
+        text-align: center;
+      }
+
+      #message h1 {
+        font-size: 22px;
+        font-weight: 500;
+        text-align: center;
+        margin: 0 0 16px;
+      }
+
+      #message p {
+        font-weight: 300;
+        line-height: 150%;
+      }
+
+      #message ul {
+        list-style: none;
+        margin: 16px 0 0;
+        padding: 0;
+        text-align: center;
+      }
+
+      .btn{
+        display: inline-block;
+        padding: 8px;
+        text-transform: uppercase;
+        text-decoration: none;
+        font-weight: 500;
+        background: rgb(3,155,229);
+        color: white;
+        border: 1px solid rgb(3,155,229);
+        border-radius: 3px;
+        font-size: 14px;
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+        cursor: pointer;
+      }
+      img{
+        padding: 5px;
+      }
+      #user {
+        box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2),0 1px 1px 0 rgba(0,0,0,0.14),0 2px 1px -1px rgba(0,0,0,0.12);
+        border-radius: 2px;
+        background: white;
+        padding: 5px 5px;
+        text-align: left;
+        position: fixed;
+        border-top: 5px solid #26C6DA;
+        right: 20px;
+        top:10px;
+      }
+      #rank {
+        box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2),0 1px 1px 0 rgba(0,0,0,0.14),0 2px 1px -1px rgba(0,0,0,0.12);
+        border-radius: 2px;
+        background: white;
+        padding: 10px;
+        width: 300px;
+        height: 500px;
+        text-align: left;
+        position: fixed;
+        border-top: 5px solid #26C6DA;
+        right: 5px;
+        bottom: 0px;
+      }
+    </style>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="./js/angular-facebook.min.js"></script>
+    <script src="./js/socket.io.js"></script>
+  </head>
+
+  <body ng-controller="con">
+    <div id="message" ng-show="!loggedIn">
+      <img ng-src="http://www.wmfirstassembly.com/wp-content/uploads/2015/04/who-am-i.jpg"><br>
+      <button class="btn" ng-click="login()">Login with facebook</button>
+    </div>
+    <div id="user" class="row" ng-show="loggedIn">
+      <div class="col-md-4">
+        <img ng-src="{{user.picture.data.url}}">
+      </div>
+      <div class="col-md-8">
+        <a href='http://fb.com/{{user.id}}' target='_blank'>{{user.name}}</a>
+        <br>
+        score : {{score}}
+      </div>
+    </div>
+
+    <div id="rank" ng-show="loggedIn">
+      User Online (<a id="online"></a>)
+    </div>
+
+
+  <script>
+    var socket = io();
+    var app = angular.module('app', ['facebook'])
+    app.config(function(FacebookProvider) {
+      FacebookProvider.init('573083182871799');
+    })
+
+    app.controller('con', function($scope, Facebook) {
+    //$scope.user_online=0;
+    socket.on('login', function(user){
+      //$('#message').append($('<li>').text(user)); // recieve
+    });
+    
+    $scope.login = function() {
+      // From now on you can use the Facebook service just as Facebook api says
+      Facebook.login(function(response) {
+        // Do something with response.
+        if(response.status === 'connected') {
+          $scope.loggedIn = true;
+          $scope.me();
+          socket.on('online',function(online){
+            document.getElementById("online").innerHTML = online;
+          });
+        } else {
+          $scope.loggedIn = false;
+        }
+      });
+    };
+    $scope.me = function() {
+      Facebook.api('/me?fields=id,name,picture', function(response) {
+        $scope.user = response;
+        socket.emit('login', $scope.user.name); // send
+        
+      });
+    };
+  });
+  </script>
+  </body>
+</html>
