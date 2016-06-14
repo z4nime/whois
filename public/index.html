@@ -150,11 +150,13 @@
 
     socket.on('login', function(data){
       data.sort($scope.sort);
+      var display;
       for(var i=0;i<data.length;i++){
         //http://www.devcurry.com/2010/05/sorting-json-array.html
-        console.log(data)
-        $('#data').append("<li><img src='"+data[i].avatar+"'/><a href='http://fb.com/"+data[i].id+"' target='_blank'>"+data[i].name+"</a> : "+data[i].score+"</li>");  // recieve
+        display =+ "<li><img src='"+data[i].avatar+"'/><a href='http://fb.com/"+data[i].id+"' target='_blank'>"+data[i].name+"</a> : "+data[i].score+"</li>";
+        //$('#data').append("<li><img src='"+data[i].avatar+"'/><a href='http://fb.com/"+data[i].id+"' target='_blank'>"+data[i].name+"</a> : "+data[i].score+"</li>");  // recieve
       }
+      $('#data').html(display);
     });
 
     $scope.sort = function(x,y) {
