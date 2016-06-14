@@ -7,21 +7,29 @@ app.use('/', express.static('public'));
 app.get('/', function(req, res){
   
 });
+var id;
 var username ;
 var online=0;
+var data = [];
 io.on('connection', function(socket){
 
   socket.on('login', function(user){
+    id = user.id
     username = user;
     online++;
+    data.push({"id":user.id,"name":user.name,"avatar":user.picture.data.url,"score":0});
     io.emit('online', online);
-    io.emit('login', user);
-    console.log(user + " : online ("+online+")");
+    io.emit('login', data);
+    console.log(user.name + " : online ("+online+")");
   });
     
   socket.on('disconnect', function(){
     if(username!=undefined){
       online--;
+      for(var i=0;i<data.length;i++){
+        if(id === data[i].id)
+          data.splice(i,1);
+      }
       io.emit('online', online);
       console.log(username + " : offline ("+online+")");
     }

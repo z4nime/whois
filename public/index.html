@@ -38,11 +38,11 @@
         line-height: 150%;
       }
 
-      #message ul {
+      #data li {
         list-style: none;
-        margin: 16px 0 0;
+        margin: 10px -50px 0;
         padding: 0;
-        text-align: center;
+        text-align: left;
       }
 
       .btn{
@@ -86,6 +86,13 @@
         right: 5px;
         bottom: 0px;
       }
+      footer{
+        position: absolute;
+        bottom: 2px;
+        text-align: center;
+        margin: auto;
+        width: 100%;
+      }
     </style>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -102,7 +109,7 @@
     <script src="./js/socket.io.js"></script>
   </head>
 
-  <body ng-controller="con">
+  <body ng-controller="con" ng-init="checkFB()">
     <div id="message" ng-show="!loggedIn">
       <img ng-src="http://www.wmfirstassembly.com/wp-content/uploads/2015/04/who-am-i.jpg"><br>
       <button class="btn" ng-click="login()">Login with facebook</button>
@@ -120,9 +127,18 @@
 
     <div id="rank" ng-show="loggedIn">
       User Online (<a id="online"></a>)
+      ___________________________________<br>
+      <div>
+        <ul id="data"></ul>
+      </div>
     </div>
 
+    <footer>
+      <a href="https://who-ami.herokuapp.com/">K I R I N</a>
+      <br>Used <a href="https://www.google.com/intl/th/chrome/browser/desktop/">Google Chrome </a>Only Power by <a href="http://heroku.com/">Heroku</a> &copy; 2016
+    </footer>
 
+<img ng-src="{{datas.picture.data.url}}"><a href='http://fb.com/{{datas.id}}' target='_blank'>{{datas.name}}</a>
   <script>
     var socket = io();
     var app = angular.module('app', ['facebook'])
@@ -131,11 +147,26 @@
     })
 
     app.controller('con', function($scope, Facebook) {
-    //$scope.user_online=0;
-    socket.on('login', function(user){
-      //$('#message').append($('<li>').text(user)); // recieve
+
+    socket.on('login', function(data){
+      data.sort($scope.sort);
+      for(var i=0;i<data.length;i++){
+        //http://www.devcurry.com/2010/05/sorting-json-array.html
+        console.log(data)
+        $('#data').append("<li><img src='"+data[i].avatar+"'/><a href='http://fb.com/"+data[i].id+"' target='_blank'>"+data[i].name+"</a> : "+data[i].score+"</li>");  // recieve
+      }
     });
-    
+
+    $scope.sort = function(x,y) {
+      return x.score - y.score; 
+    }
+    $scope.checkFB = function(){
+      Facebook.getLoginStatus(function(response) {
+        if(response.status === 'connected') {
+          $scope.login();
+        }
+      });
+    }
     $scope.login = function() {
       // From now on you can use the Facebook service just as Facebook api says
       Facebook.login(function(response) {
@@ -154,7 +185,7 @@
     $scope.me = function() {
       Facebook.api('/me?fields=id,name,picture', function(response) {
         $scope.user = response;
-        socket.emit('login', $scope.user.name); // send
+        socket.emit('login', $scope.user); // send
         
       });
     };
