@@ -9,17 +9,13 @@ app.get('/', function(req, res){
 });
 var id;
 var username;
-var data = [
-// {"id":1,"name":"s","score":4},
-// {"id":0,"name":"w","score":10},
-// {"id":5,"name":"a","score":5}
-];
+var data = [];
 io.on('connection', function(socket){
 
   socket.on('login', function(user){
     id = user.id
     username = user.name;
-    data.push({"client_id":socket.client.id,"id":user.id,"name":user.name,"avatar":user.picture.data.url,"score":0});
+    data.push({"client_id":socket.client.id,"id":user.id,"name":user.name,"avatar":user.picture.data.url,"score":999});
     io.emit('online', data.length);
     io.emit('data', data);
     console.log(user.name + " : online ("+data.length+")");
