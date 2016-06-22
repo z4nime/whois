@@ -15,11 +15,25 @@ io.on('connection', function(socket){
   socket.on('login', function(user){
     id = user.id
     username = user.name;
-    data.push({"client_id":socket.client.id,"id":user.id,"name":user.name,"avatar":user.picture.data.url,"score":999});
+    //data.push({"client_id":socket.client.id,"id":user.id,"name":user.name,"avatar":user.avatar,"score":user.score});
+    if(data.length == 0)
+      data.push({"client_id":socket.client.id,"id":user.id,"name":user.name,"avatar":user.avatar,"score":user.score});
+    else{
+      for(var i=0;i<data.length;i++){
+        if(socket.client.id==data[i].client_id){
+          data.splice(i,1);
+          data.push({"client_id":socket.client.id,"id":user.id,"name":user.name,"avatar":user.avatar,"score":user.score});
+        }
+        else if(socket.client.id!=data[i].client_id)
+          data.push({"client_id":socket.client.id,"id":user.id,"name":user.name,"avatar":user.avatar,"score":user.score});
+      }
+      
+    }
     io.emit('online', data.length);
     io.emit('data', data);
     console.log(user.name + " : online ("+data.length+")");
   });
+
   socket.on('disconnect', function(){
     for(var i=0;i<data.length;i++){
       if(socket.client.id==data[i].client_id){
