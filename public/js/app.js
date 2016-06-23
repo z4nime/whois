@@ -11,11 +11,11 @@ app.factory('mySocket', function (socketFactory) {
 });
 app.controller('con', function($scope, Facebook ,mySocket,cfpLoadingBar) {
   $scope.json = [
-    {"avatar":"./images/characters/450070.png","name":"Suzumiya Haruhi","choice":["Suzumiya Harupi","Suzumiya Haruhi"]},
-    {"avatar":"./images/characters/Natsuki_Subaru_Anime.png","name":"Subaru Natsuki","choice":["Subaru Natsuki","Subaru Natsuke"]},
-    {"avatar":"./images/characters/Emilia_Anime_2.png","name":"Emilia","choice":["Emilie","Emilia"]},
-    {"avatar":"./images/characters/300489.jpg","name":"Puck","choice":["Pung","Puck"]},
-    {"avatar":"./images/characters/49712631d35ef74abf2f5f05ee7fcdfe_480.jpg","name":"Felt","choice":["Fate","Felt"]},
+    {"avatar":"http://cdn.myanimelist.net/images/characters/4/277146.jpg","name":"Lelouch Lamperouge","choice":["Lelouch Lamperoage","Lelouch Lamperouge"]},
+    {"avatar":"http://cdn.myanimelist.net/images/characters/12/274103.jpg","name":"Luffy Monkey D","choice":["Luffy Monkey D","Luffy Mankey D"]},
+    {"avatar":"http://cdn.myanimelist.net/images/characters/9/72533.jpg","name":"Edward Elric","choice":["Edward Elric","Edword Elric"]},
+    {"avatar":"http://cdn.myanimelist.net/images/characters/6/122643.jpg","name":"Rintarou Okabe","choice":["Rentarou Okabe","Rintarou Okabe"]},
+    {"avatar":"http://cdn.myanimelist.net/images/characters/15/241479.jpg","name":"Gintoki Sakata","choice":["Gintoki Sakata","Gintoke Sakata"]},
   ];
   $scope.score =0;
   mySocket.on('data', function(data){
@@ -58,15 +58,22 @@ app.controller('con', function($scope, Facebook ,mySocket,cfpLoadingBar) {
   $scope.gameOver = function(){
     cfpLoadingBar.complete()
     $scope.over = true;
-    $scope.score =0;
-    mySocket.emit('login', $scope.me()); 
-    $('#game_over').fadeIn(500);
+    Facebook.api('/me?fields=id,name,picture', function(response) {
+      $scope.score =0;
+      var user = {"id":response.id,"name":response.name,"avatar":response.picture.data.url,"score":$scope.score};
+      mySocket.emit('score', user); 
+      $('#game_over').fadeIn(500);
+    });
   }
+
   $scope.answer = function(ans){
     if(ans === $scope.true.name){
       $scope.goOn();
-      ++$scope.score;
-      mySocket.emit('login', $scope.me()); 
+      Facebook.api('/me?fields=id,name,picture', function(response) {
+        ++$scope.score;
+        var user = {"id":response.id,"name":response.name,"avatar":response.picture.data.url,"score":$scope.score};
+        mySocket.emit('score', user); 
+      });
     }
     else
       $scope.gameOver();
