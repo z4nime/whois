@@ -20,14 +20,14 @@ io.on('connection', function(socket){
 
   socket.on('score', function(res){
     for(var i=0;i<user_play.length;i++){
-      console.log("user : " +user_play[i].client_id + " client : " + socket.client.id)
+      console.log("user : " +user_play[i].name + " client : " + socket.client.id)
       if(socket.client.id==user_play[i].client_id){
         if(real.length == 0){
-          real.push({"client_id":user_play[i].client_id,"id":res.id,"name":res.name,"avatar":res.avatar,"score":res.score});
+          real.push({"client_id":socket.client.id,"id":res.id,"name":res.name,"avatar":res.avatar,"score":res.score});
         }
         else{
           real.splice(i,1);
-          real.push({"client_id":user_play[i].client_id,"id":res.id,"name":res.name,"avatar":res.avatar,"score":res.score});
+          real.push({"client_id":socket.client.id,"id":res.id,"name":res.name,"avatar":res.avatar,"score":res.score});
         }
       }
     }
