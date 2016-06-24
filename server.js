@@ -4,9 +4,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 app.use('/', express.static('public'));
-app.get('/', function(req, res){
-  
-});
+
 var id;
 var user_play = [];
 var real = [];
@@ -22,7 +20,7 @@ io.on('connection', function(socket){
 
   socket.on('score', function(res){
     for(var i=0;i<user_play.length;i++){
-      //console.log("user : " +user_play[i].client_id + " client : " + socket.client.id)
+      console.log("user : " +user_play[i].client_id + " client : " + socket.client.id)
       if(socket.client.id==user_play[i].client_id){
         if(real.length == 0){
           real.push({"client_id":user_play[i].client_id,"id":res.id,"name":res.name,"avatar":res.avatar,"score":res.score});
@@ -47,7 +45,7 @@ io.on('connection', function(socket){
         user_play.splice(i,1);
         io.emit('online', user_play.length);
         io.emit('data', real);
-        console.log(name + " : offline ("+user_play.length+")");
+        console.log(Who_disconnect + " : offline ("+user_play.length+")");
       }
     }
 

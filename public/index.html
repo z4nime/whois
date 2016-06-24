@@ -126,15 +126,17 @@
         bottom: 0px;
       }
       #board {
-        box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2),0 1px 1px 0 rgba(0,0,0,0.14),0 2px 1px -1px rgba(0,0,0,0.12);
-        border-radius: 2px;
-        background: white;
+        /*box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2),0 1px 1px 0 rgba(0,0,0,0.14),0 2px 1px -1px rgba(0,0,0,0.12);*/
+        /*border-radius: 2px;*/
+        /*background: white;*/
         padding: 5px;
         margin: 10px 0 auto;
         height: 550px;
-        border-top: 5px solid #03A9F4;
-        position: absolute;
-        right: 0;
+        /*border-top: 5px solid #03A9F4;*/
+        position: fixed;
+        text-align: center;
+        margin: auto;
+        width: 100%;
       }
       footer{
         position: fixed;
@@ -142,6 +144,7 @@
         text-align: center;
         margin: auto;
         width: 100%;
+        text-shadow: 0 0 3px;
       }
       .demo-list-action {
         width: 300px;
@@ -187,7 +190,7 @@
         -webkit-transition: all 1s linear;
       }
       .characters{
-        width: 460px;
+        width: 283px;
         margin: 0 auto;
       }
       .box{
@@ -220,7 +223,7 @@
       <p><button class="btn" ng-click="continue()">Continue?</button></p>
       <p><button class="btn">Share facebook</button></p>
     </div>
-    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+    <div>
       <div id="board" ng-show="loggedIn">
         <div class="box">
           <img class="characters" src="{{characters.avatar}}">
@@ -229,7 +232,7 @@
         </div>
       </div>
     </div>
-    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+    <div>
       <div id="user"  ng-show="loggedIn">
         <div class="demo-list-action mdl-list">
           <div class="mdl-list__item">
