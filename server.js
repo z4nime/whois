@@ -5,30 +5,21 @@ var io = require('socket.io')(http);
 
 app.use('/', express.static('public'));
 
-var id;
-var user_play = [];
 var real = [];
 var Who_disconnect;
 io.on('connection', function(socket){
 
   socket.on('login', function(user){
-    id = user.id
-    user_play.push({"client_id":socket.client.id});
-    io.emit('online', user_play.length);
-    console.log(user.name + " : online ("+user_play.length+")");
+    real.push({"client_id":socket.client.id,"id":user.id,"name":user.name,"avatar":user.avatar,"score":user.score});
+    io.emit('online', real.length);
+    console.log(user.name + " : online ("+real.length+")");
   });
 
   socket.on('score', function(res){
-    for(var i=0;i<user_play.length;i++){
-      console.log("user : " +user_play[i].name + " client : " + socket.client.id)
-      if(socket.client.id==user_play[i].client_id){
-        if(real.length == 0){
-          real.push({"client_id":socket.client.id,"id":res.id,"name":res.name,"avatar":res.avatar,"score":res.score});
-        }
-        else{
-          real.splice(i,1);
-          real.push({"client_id":socket.client.id,"id":res.id,"name":res.name,"avatar":res.avatar,"score":res.score});
-        }
+    for(var i=0;i<real.length;i++){
+      if(socket.client.id==real[i].client_id){
+        real.splice(i,1);
+        real.push({"client_id":socket.client.id,"id":res.id,"name":res.name,"avatar":res.avatar,"score":res.score});
       }
     }
     io.emit('data', real);
@@ -38,17 +29,11 @@ io.on('connection', function(socket){
       if(socket.client.id==real[i].client_id){
         Who_disconnect=real[i].name;
         real.splice(i,1);
-      }
-    }
-    for(var i=0;i<user_play.length;i++){
-      if(socket.client.id==user_play[i].client_id){
-        user_play.splice(i,1);
-        io.emit('online', user_play.length);
         io.emit('data', real);
-        console.log(Who_disconnect + " : offline ("+user_play.length+")");
       }
     }
-
+    io.emit('online', real.length);
+    console.log(Who_disconnect + " : offline ("+real.length+")");
   });
 });
 

@@ -1,114 +1,75 @@
 <!DOCTYPE html>
 <html ng-app="app">
 <head>
-	<title></title>
+    <title>Who am I.io [ ฉันคือใคร ]</title>
 
-	<!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-  <!-- Optional theme -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-	<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="./js/angular-facebook.min.js"></script>
+    <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css' type='text/css' media='all' />
+    <script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js'></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-animate.min.js"></script>
+
+    <script src="./js/socket.io.js"></script>
+    <script src="./js/socket.js"></script>
+    <script src="./js/app.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
-<body ng-controller="con">
-	<input id="upload" type="file" required>
-	<button type="submit" >uoload</button>
+<body ng-controller="upload" ng-init="init()">
+	<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+		<form class="form-horizontal">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Avatar</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" ng-model="url">
+				</div>
+			</div>
+  			<div class="form-group">
+				<label class="col-sm-2 control-label">Name</label>
+				<div class="col-sm-10">
+				    <input type="text" class="form-control" ng-model="name">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Chioce</label>
+				<div class="col-sm-10">
+				    <input type="text" class="form-control" ng-model="ch">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Chioce</label>
+				<div class="col-sm-10">
+				    <input type="text" class="form-control" ng-model="ch2">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+				    <button class="btn btn-default" ng-click="submit(url,name,ch,ch2)">submit</button>
+				    <button class='btn' ng-click="save()">save</button>
+				</div>
+			</div>
+		</form>
+	</div>
 
-	<script>
-		app.controller('con', function($scope) {
-
-		});
-	</script>
-
-
-		<!-- <script>
-	  // Initialize Firebase
-	  var config = {
-	    apiKey: "AIzaSyDy-qw4QlBVkotEtSyltTHRnHOFOZ-bdJs",
-	    authDomain: "anime-a8fc5.firebaseapp.com",
-	    databaseURL: "https://anime-a8fc5.firebaseio.com",
-	    storageBucket: "anime-a8fc5.appspot.com",
-	  };
-	  firebase.initializeApp(config);
-	  var storage = firebase.storage();
-
-			  // File or Blob named mountains.jpg
-		var file = 'Screenshot_5.png'
-		var storageRef = firebase.storage().ref();
-
-		// Create the file metadata
-		var metadata = {
-		  contentType: 'image/jpeg'
-		};
-
-		var getFileBlob = function (url, cb) {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", url);
-        xhr.responseType = "blob";
-        xhr.addEventListener('load', function() {
-            cb(xhr.response);
-        });
-        xhr.send();
-		};
-
-		var blobToFile = function (blob, name) {
-		        blob.lastModifiedDate = new Date();
-		        blob.name = name;
-		        return blob;
-		};
-
-		var getFileObject = function(filePathOrUrl, cb) {
-		       getFileBlob(filePathOrUrl, function (blob) {
-		          cb(blobToFile(blob, 'Screenshot_5.png'));
-		       });
-		};
-
-
-		function up(){
-			var file = document.getElementById("upload").files[0].name;
-			getFileObject(file, function (fileObject) {
-
-			var uploadTask = storageRef.child(file).put(fileObject);
-
-			// Listen for state changes, errors, and completion of the upload.
-			uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
-			  function(snapshot) {
-			    // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-			    var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-			    console.log('Upload is ' + progress + '% done');
-			    switch (snapshot.state) {
-			      case firebase.storage.TaskState.PAUSED: // or 'paused'
-			        console.log('Upload is paused');
-			        break;
-			      case firebase.storage.TaskState.RUNNING: // or 'running'
-			        console.log('Upload is running');
-			        break;
-			    }
-			  }, function(error) {
-			  switch (error.code) {
-			    case 'storage/unauthorized':
-			      // User doesn't have permission to access the object
-			      break;
-
-			    case 'storage/canceled':
-			      // User canceled the upload
-			      break;
-
-			    case 'storage/unknown':
-			      // Unknown error occurred, inspect error.serverResponse
-			      break;
-			  }
-				}, function() {
-				  // Upload completed successfully, now we can get the download URL
-				  var downloadURL = uploadTask.snapshot.downloadURL;
-				});
-			}); 
-		}
-		
-	</script> -->
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		<input type="text" class="form-control" ng-model="search" placeholder="search characters anime total ( {{datas.length }} )">
+		<div ng-repeat="data in datas | filter:search" style="float:left;text-align:center;">
+			<img style="width:120px;margin:5px;" ng-src="{{data.avatar}}">
+			<p>{{data.name}}</p>
+		</div>
+	</div>
 </body>
 </html>
