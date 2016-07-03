@@ -8,13 +8,12 @@ app.use('/', express.static('public'));
 var real = [];
 var Who_disconnect;
 io.on('connection', function(socket){
-
   socket.on('login', function(user){
     real.push({"client_id":socket.client.id,"id":user.id,"name":user.name,"avatar":user.avatar,"score":user.score});
     io.emit('online', real.length);
     console.log(user.name + " : online ("+real.length+")");
   });
-
+  
   socket.on('score', function(res){
     for(var i=0;i<real.length;i++){
       if(socket.client.id==real[i].client_id){

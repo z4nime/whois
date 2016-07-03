@@ -27,7 +27,7 @@
     <script src="./js/socket.js"></script>
     <script src="./js/app.js"></script>
     <link rel="stylesheet" href="./css/style.css">
-    
+
   </head>
 
   <body ng-controller="con" ng-init="checkFB();init()">
@@ -41,6 +41,8 @@
       <p><button class="btn" ng-click="continue()">Continue?</button></p>
       <p><button class="btn">Share facebook</button></p>
     </div>
+
+    <span class="time" ng-bind="time"></span>
     <div>
       <div id="board" ng-show="loggedIn">
         <div class="box">
@@ -62,14 +64,13 @@
           </div>
         </div>
       </div>
-      
+
       <div id="rank" ng-show="loggedIn">
         <div class="bar">
           <span>User Online ( <a>{{online}}</a> )</span>
         </div>
-          
         <div class="demo-list-action mdl-list" id="scroll">
-          <div class="mdl-list__item" ng-repeat="datas in data | orderBy:'-score'">
+          <div class="mdl-list__item" ng-repeat="datas in data | orderBy:'-score'" >
             <span class="mdl-list__item-primary-content">
               <img class="material-icons mdl-list__item-avatar" ng-src="{{datas.avatar}}">
               <span><a href="http://fb.com/{{datas.id}}" target="_blank"> {{datas.name}} </a></span>
@@ -79,7 +80,6 @@
         </div>
       </div>
     </div>
-
     <footer>
       <a href="https://who-ami.herokuapp.com/">K I R I N</a>
       <br>Support Browser <a href="https://www.google.com/intl/th/chrome/browser/desktop/">Google Chrome </a>Only • Power by <a href="http://heroku.com/">Heroku</a> &copy; 2016
@@ -87,7 +87,7 @@
 
 <img ng-src="{{datas.picture.data.url}}"><a href='http://fb.com/{{datas.id}}' target='_blank'>{{datas.name}}</a>
   <script>
-    
+
   </script>
   </body>
 </html>

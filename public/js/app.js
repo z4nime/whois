@@ -1,12 +1,12 @@
 'use strict';
 
-var app = angular.module('app', ['facebook','btford.socket-io','chieffancypants.loadingBar', 'ngAnimate'])
+var app = angular.module('app', ['facebook','btford.socket-io'/*,'angular-loading-bar'*/, 'ngAnimate'])
 app.config(function(FacebookProvider) {
   FacebookProvider.init('573083182871799');
 });
-app.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
-  cfpLoadingBarProvider.includeSpinner = false;
-}]);
+// app.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+//   cfpLoadingBarProvider.includeSpinner = false;
+// }]);
 app.factory('mySocket', function (socketFactory) {
   return socketFactory();
 });
@@ -30,14 +30,16 @@ app.controller('upload',function($scope,$http){
     .then(function successCallback(response) {
       console.log(response)
     }, function errorCallback(response) {
-      
+
     });
-    
+
   }
 })
-app.controller('con', function($scope, Facebook ,mySocket,cfpLoadingBar,$http) {
+app.controller('con', function($scope, Facebook ,mySocket/*,cfpLoadingBar*/,$http,$interval,$timeout) {
   $scope.json = [];
   $scope.count;
+  var stopIn;
+  var stopOut;
   $scope.init = function(){
     $http.get("https://api.myjson.com/bins/rubt").success(function(data){
       $scope.json = data;
@@ -57,38 +59,40 @@ app.controller('con', function($scope, Facebook ,mySocket,cfpLoadingBar,$http) {
     $scope.init();
     $('#press_start').fadeOut(500);
     $scope.true = $scope.getRandom();
-    //$scope.timeOut();
+    $scope.countTime();
   }
   $scope.goOn = function(){
     $scope.json.splice($scope.count,1);
     $scope.true = $scope.getRandom();
-    //$scope.timeOut();
+    $timeout.cancel(stopOut);
+    $interval.cancel(stopIn);
+    $scope.countTime();
   }
 
-  // $scope.timeOut = function(){
-  //   $scope.time =10000;
-  //   cfpLoadingBar.set(0.1);
-  //   cfpLoadingBar.start();
-  //   setTimeout(function(){
-  //     cfpLoadingBar.complete()
-  //     $scope.over = true;
-  //     $scope.score =0;
-  //     mySocket.emit('login', $scope.me()); 
-  //     $('#game_over').fadeIn(500);
-  //   },$scope.time);
-  // }
+  $scope.countTime = function(){
+    $scope.time = 10
+    stopIn = $interval(function(){
+      if($scope.time>0)
+        $scope.time--
+    },1000);
+    stopOut = $timeout(function(){
+      $scope.gameOver();
+      $interval.cancel(stopIn);
+    },10000)
+  }
 
   $scope.continue = function(){
     $('#game_over').fadeOut(500);
     $scope.startGame();
   }
   $scope.gameOver = function(){
-    cfpLoadingBar.complete()
+    $timeout.cancel(stopOut);
+    $interval.cancel(stopIn);
     $scope.over = true;
     Facebook.api('/me?fields=id,name,picture', function(response) {
       $scope.score =0;
       var user = {"id":response.id,"name":response.name,"avatar":response.picture.data.url,"score":$scope.score};
-      mySocket.emit('score', user); 
+      mySocket.emit('score', user);
       $('#game_over').fadeIn(500);
     });
   }
@@ -99,7 +103,7 @@ app.controller('con', function($scope, Facebook ,mySocket,cfpLoadingBar,$http) {
       Facebook.api('/me?fields=id,name,picture', function(response) {
         ++$scope.score;
         var user = {"id":response.id,"name":response.name,"avatar":response.picture.data.url,"score":$scope.score};
-        mySocket.emit('score', user); 
+        mySocket.emit('score', user);
       });
     }
     else
