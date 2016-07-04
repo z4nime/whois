@@ -95,6 +95,11 @@ app.controller('con', function($scope, Facebook ,mySocket/*,cfpLoadingBar*/,$htt
       mySocket.emit('score', user);
       $('#game_over').fadeIn(500);
     });
+    Facebook.ui({
+  method: 'feed',
+  link: 'https://who-ami.herokuapp.com/',
+  caption: 'An example caption',
+}, function(response){});
   }
 
   $scope.answer = function(ans){

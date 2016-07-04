@@ -2,7 +2,11 @@
 <html ng-app="app">
   <head>
     <title>Who am I.io [ ฉันคือใคร ]</title>
-
+    <meta property="og:url"           content="localhost:3000" />
+  	<meta property="og:type"          content="website" />
+  	<meta property="og:title"         content="Your Website Title" />
+  	<meta property="og:description"   content="Your description" />
+  	<meta property="og:image"         content="http://cdn.myanimelist.net/images/characters/7/204821.jpg" />
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
@@ -39,7 +43,10 @@
     </div>
     <div id="game_over" ng-hide="!over">
       <p><button class="btn" ng-click="continue()">Continue?</button></p>
-      <p><button class="btn">Share facebook</button></p>
+      <p>
+        <div class="fb-share-button" data-href="https://who-ami.herokuapp.com/" data-layout="button_count"></div>
+      </p>
+      <!-- <button class="btn">Share facebook</button> -->
     </div>
 
     <span class="time" ng-bind="time"></span>
@@ -84,10 +91,13 @@
       <a href="https://who-ami.herokuapp.com/">K I R I N</a>
       <br>Support Browser <a href="https://www.google.com/intl/th/chrome/browser/desktop/">Google Chrome </a>Only • Power by <a href="http://heroku.com/">Heroku</a> &copy; 2016
     </footer>
-
-<img ng-src="{{datas.picture.data.url}}"><a href='http://fb.com/{{datas.id}}' target='_blank'>{{datas.name}}</a>
-  <script>
-
-  </script>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/th_TH/sdk.js#xfbml=1&version=v2.6&appId=573083182871799";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
   </body>
 </html>
