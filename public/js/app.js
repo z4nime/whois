@@ -38,6 +38,8 @@ app.controller('upload',function($scope,$http){
 app.controller('con', function($scope, Facebook ,mySocket/*,cfpLoadingBar*/,$http,$interval,$timeout) {
   $scope.json = [];
   $scope.count;
+  $scope.score =0;
+  $scope.postScore =0;
   var stopIn;
   var stopOut;
   $scope.init = function(){
@@ -45,7 +47,6 @@ app.controller('con', function($scope, Facebook ,mySocket/*,cfpLoadingBar*/,$htt
       $scope.json = data;
     });
   }
-  $scope.score =0;
   mySocket.on('data', function(data){
       $scope.data = data;
   });
@@ -89,22 +90,23 @@ app.controller('con', function($scope, Facebook ,mySocket/*,cfpLoadingBar*/,$htt
     $timeout.cancel(stopOut);
     $interval.cancel(stopIn);
     $scope.over = true;
-    Facebook.ui({
-      method: 'feed',
-      link: 'https://who-ami.herokuapp.com/',
-      caption: 'คุณได้คะแนน'+$scope.score,
-      description:'มาทายกันเถอะว่าฉันคือใครในเหล่าตัวละครอนิเมะ',
-      picture: 'http://samanthamarch.com/wp-content/uploads/2014/07/who-am-i.jpg',
-
-    }, function(response){});
     Facebook.api('/me?fields=id,name,picture', function(response) {
+      $scope.postScore = $scope.score;
       $scope.score =0;
       var user = {"id":response.id,"name":response.name,"avatar":response.picture.data.url,"score":$scope.score};
       mySocket.emit('score', user);
       $('#game_over').fadeIn(500);
     });
   }
-
+  $scope.postFB = function(){
+    Facebook.ui({
+      method: 'feed',
+      link: 'https://who-ami.herokuapp.com/',
+      description: '+++ คุณได้คะแนน '+$scope.postScore+' แต้ม ',
+      caption:'มาทายกันเถอะว่าฉันคือใครในเหล่าตัวละครอนิเมะ',
+      picture: 'http://samanthamarch.com/wp-content/uploads/2014/07/who-am-i.jpg',
+    }, function(response){});
+  }
   $scope.answer = function(ans){
     if(ans === $scope.true.name){
       $scope.goOn();
