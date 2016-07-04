@@ -89,17 +89,20 @@ app.controller('con', function($scope, Facebook ,mySocket/*,cfpLoadingBar*/,$htt
     $timeout.cancel(stopOut);
     $interval.cancel(stopIn);
     $scope.over = true;
+    Facebook.ui({
+      method: 'feed',
+      link: 'https://who-ami.herokuapp.com/',
+      caption: 'คุณได้คะแนน'+$scope.score,
+      description:'มาทายกันเถอะว่าฉันคือใครในเหล่าตัวละครอนิเมะ',
+      picture: 'http://samanthamarch.com/wp-content/uploads/2014/07/who-am-i.jpg',
+
+    }, function(response){});
     Facebook.api('/me?fields=id,name,picture', function(response) {
       $scope.score =0;
       var user = {"id":response.id,"name":response.name,"avatar":response.picture.data.url,"score":$scope.score};
       mySocket.emit('score', user);
       $('#game_over').fadeIn(500);
     });
-    Facebook.ui({
-  method: 'feed',
-  link: 'https://who-ami.herokuapp.com/',
-  caption: 'An example caption',
-}, function(response){});
   }
 
   $scope.answer = function(ans){
