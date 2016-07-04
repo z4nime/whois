@@ -43,10 +43,7 @@
     </div>
     <div id="game_over" ng-hide="!over">
       <p><button class="btn" ng-click="continue()">Continue?</button></p>
-      <p>
-        <div class="fb-share-button" data-href="https://who-ami.herokuapp.com/" data-layout="button_count"></div>
-      </p>
-      <!-- <button class="btn">Share facebook</button> -->
+      <p><button class="btn" ng-click="postFB()">Share facebook</button></p>
     </div>
 
     <span class="time" ng-bind="time"></span>
