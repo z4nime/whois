@@ -13,7 +13,7 @@ io.on('connection', function(socket){
     io.emit('online', real.length);
     console.log(user.name + " : online ("+real.length+")");
   });
-  
+
   socket.on('score', function(res){
     for(var i=0;i<real.length;i++){
       if(socket.client.id==real[i].client_id){

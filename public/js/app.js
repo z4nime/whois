@@ -89,8 +89,9 @@ app.controller('con', function($scope, Facebook ,mySocket/*,cfpLoadingBar*/,$htt
   $scope.gameOver = function(){
     $timeout.cancel(stopOut);
     $interval.cancel(stopIn);
-    $scope.over = true;
+
     Facebook.api('/me?fields=id,name,picture', function(response) {
+      $scope.over = true;
       $scope.postScore = $scope.score;
       $scope.score =0;
       var user = {"id":response.id,"name":response.name,"avatar":response.picture.data.url,"score":$scope.score};
