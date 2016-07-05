@@ -1,12 +1,7 @@
 <!doctype html>
 <html ng-app="app">
   <head>
-    <title>Who am I.io [ ฉันคือใคร ]</title>
-    <meta property="og:url"           content="localhost:3000" />
-  	<meta property="og:type"          content="website" />
-  	<meta property="og:title"         content="Your Website Title" />
-  	<meta property="og:description"   content="Your description" />
-  	<meta property="og:image"         content="http://cdn.myanimelist.net/images/characters/7/204821.jpg" />
+    <title>Who am I.io [ ฉันคือใคร? ]</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
@@ -39,11 +34,11 @@
       <p><button class="btn" ng-click="login()">Login with facebook</button></p>
     </div>
     <div id="press_start" ng-show="loggedIn">
-      <p ng-click="startGame()">Press Start</p>
+      <img id="press_start_btn" src="./images/pres_start.png" ng-click="startGame()">
     </div>
     <div id="game_over" ng-hide="!over">
       <p><button class="btn" ng-click="continue()">Continue?</button></p>
-      <p><button class="btn" ng-click="postFB()">Share facebook</button></p>
+      <p><button class="btn" ng-click="postFB()">Post Score</button></p>
     </div>
 
     <span class="time" ng-bind="time"></span>

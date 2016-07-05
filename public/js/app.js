@@ -102,7 +102,7 @@ app.controller('con', function($scope, Facebook ,mySocket/*,cfpLoadingBar*/,$htt
     Facebook.ui({
       method: 'feed',
       link: 'https://who-ami.herokuapp.com/',
-      description: '+++ คุณได้คะแนน '+$scope.postScore+' แต้ม ',
+      description: '+++ คุณได้คะแนน '+$scope.postScore+' แต้ม +++',
       caption:'มาทายกันเถอะว่าฉันคือใครในเหล่าตัวละครอนิเมะ',
       picture: 'http://samanthamarch.com/wp-content/uploads/2014/07/who-am-i.jpg',
     }, function(response){});
