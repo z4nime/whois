@@ -145,7 +145,7 @@ footer{
 }
 #game_over{
   position: fixed;
-  background: #efb8ca url('../images/Untitled-1.png') center no-repeat;
+  background: #efb8ca url('../images/game_over.png') center no-repeat;
   width: 100%;
   height: 100%;
   z-index: 4;
