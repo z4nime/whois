@@ -2,8 +2,8 @@
 <html ng-app="app">
   <head>
     <title>Who am I.io [ ฉันคือใคร? ] มาเล่นทายตัวละครกันเถอะ</title>
-    <meta name=”keywords” content="มาเล่นทายตัวละครกันเถอะ,ฉันคือใครในเหล่าอนิเมะ,who am i?,who am i.io,ฉันคือใคร?" />
-    <meta name=”description” content="" />
+    <meta name="keywords" content="มาเล่นทายตัวละครกันเถอะ,ฉันคือใครในเหล่าอนิเมะ,who am i?,who am i.io,ฉันคือใคร?" />
+    <meta name="description" content="มาเล่นทายตัวละครกันเถอะ,ฉันคือใครในเหล่าอนิเมะ,who am i?,who am i.io,ฉันคือใคร?" />
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
@@ -33,10 +33,10 @@
 
   <body ng-controller="con" ng-init="checkFB();init()">
     <div id="login" ng-show="!loggedIn">
-      <img src="./images/play.jpg" ng-click="login()" alt="มาเล่นทายตัวละครกันเถอะ,ฉันคือใครในเหล่าอนิเมะ,who am i?,who am i.io,ฉันคือใคร?" />>
+      <img src="./images/play.jpg" ng-click="login()" alt="มาเล่นทายตัวละครกันเถอะ,ฉันคือใครในเหล่าอนิเมะ,who am i?,who am i.io,ฉันคือใคร?" />
     </div>
     <div id="press_start" ng-show="loggedIn">
-      <img id="press_start_btn" src="./images/pres_start.png" ng-click="startGame()" alt="มาเล่นทายตัวละครกันเถอะ,ฉันคือใครในเหล่าอนิเมะ,who am i?,who am i.io,ฉันคือใคร?" />>
+      <img id="press_start_btn" src="./images/pres_start.png" ng-click="startGame()" alt="มาเล่นทายตัวละครกันเถอะ,ฉันคือใครในเหล่าอนิเมะ,who am i?,who am i.io,ฉันคือใคร?" />
     </div>
     <div id="game_over" ng-hide="!over">
       <p><button class="btn" ng-click="continue()" ng-mouseover="popHover()" >try again?</button></p>
@@ -46,8 +46,15 @@
     <span class="time" ng-bind="time"></span>
     <div>
       <div id="board" ng-show="loggedIn">
+        <div id="google_ads">
+          <!-- whoami -->
+          <ins class="adsbygoogle"
+               style="display:inline-block;width:300px;height:600px"
+               data-ad-client="ca-pub-7197999805164308"
+               data-ad-slot="8311620677"></ins>
+        </div>
         <div class="box">
-          <img class="characters" ng-src="{{characters.avatar}}" alt="มาเล่นทายตัวละครกันเถอะ,ฉันคือใครในเหล่าอนิเมะ,who am i?,who am i.io,ฉันคือใคร?" />>
+          <img class="characters" ng-src="{{characters.avatar}}" alt="มาเล่นทายตัวละครกันเถอะ,ฉันคือใครในเหล่าอนิเมะ,who am i?,who am i.io,ฉันคือใคร?" />
             <div id="ch" style="bottom:7px;"><button ng-mouseover="popHover()" ng-click="answer(characters.choice[0])"class="btn">{{characters.choice[0]}}</button></div>
             <div id="ch" style="bottom:55px;"><button ng-mouseover="popHover()" ng-click="answer(characters.choice[1])" class="btn">{{characters.choice[1]}}</button></div>
         </div>
@@ -94,25 +101,26 @@
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
 
-    $(document).on("contextmenu",function(e){
-      e.preventDefault();
-    });
-    $(document).keydown(function(event){
-      if(event.keyCode==123)
-        return false;
-      else if(event.ctrlKey && event.shiftKey && event.keyCode==73)
-        return false;  //Prevent from ctrl+shift+i
-    });
+    // $(document).on("contextmenu",function(e){
+    //   e.preventDefault();
+    // });
+    // $(document).keydown(function(event){
+    //   if(event.keyCode==123)
+    //     return false;
+    //   else if(event.ctrlKey && event.shiftKey && event.keyCode==73)
+    //     return false;  //Prevent from ctrl+shift+i
+    // });
     </script>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <!-- ionic banner -->
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-7197999805164308"
-         data-ad-slot="5862004272"
-         data-ad-format="auto"></ins>
     <script>
     (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-7197999805164308",
+        enable_page_level_ads: true
+      });
+    </script>
+
   </body>
 </html>

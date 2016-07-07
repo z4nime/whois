@@ -199,3 +199,8 @@ footer{
   text-align: center;
   cursor: pointer;
 }
+#google_ads{
+  text-align: left;
+  width: 100%;
+  position: fixed;
+}
