@@ -104,8 +104,8 @@ app.controller('con', function($scope, Facebook ,mySocket/*,cfpLoadingBar*/,$htt
       method: 'feed',
       link: 'https://who-ami.herokuapp.com/',
       description: '+++ คุณได้คะแนน '+$scope.postScore+' แต้ม +++',
-      caption:'มาทายกันเถอะว่าฉันคือใครในเหล่าตัวละครอนิเมะ',
-      picture: 'http://s.pictub.club/2016/07/06/FSxZ5.jpg',
+      caption: 'มาทายกันเถอะว่าฉันคือใครในเหล่าตัวละครอนิเมะ',
+      picture: 'http://s.pictub.club/2016/07/07/FfGGG.jpg',
     }, function(response){});
   }
   $scope.answer = function(ans){
