@@ -1,7 +1,9 @@
 <!doctype html>
 <html ng-app="app">
   <head>
-    <title>Who am I.io [ ฉันคือใคร? ]</title>
+    <title>Who am I.io [ ฉันคือใคร? ] มาเล่นทายตัวละครกันเถอะ</title>
+    <meta name=”keywords” content="มาเล่นทายตัวละครกันเถอะ,ฉันคือใครในเหล่าอนิเมะ,who am i?,who am i.io,ฉันคือใคร?" />
+    <meta name=”description” content="" />
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
@@ -30,24 +32,24 @@
   </head>
 
   <body ng-controller="con" ng-init="checkFB();init()">
-    <div id="message" ng-show="!loggedIn">
-      <p><button class="btn" ng-click="login()">Login with facebook</button></p>
+    <div id="login" ng-show="!loggedIn">
+      <img src="./images/play.jpg" ng-click="login()" alt="มาเล่นทายตัวละครกันเถอะ,ฉันคือใครในเหล่าอนิเมะ,who am i?,who am i.io,ฉันคือใคร?" />>
     </div>
     <div id="press_start" ng-show="loggedIn">
-      <img id="press_start_btn" src="./images/pres_start.png" ng-click="startGame()">
+      <img id="press_start_btn" src="./images/pres_start.png" ng-click="startGame()" alt="มาเล่นทายตัวละครกันเถอะ,ฉันคือใครในเหล่าอนิเมะ,who am i?,who am i.io,ฉันคือใคร?" />>
     </div>
     <div id="game_over" ng-hide="!over">
-      <p><button class="btn" ng-click="continue()">try again?</button></p>
-      <p><button class="btn" ng-click="postFB()">Post Score</button></p>
+      <p><button class="btn" ng-click="continue()" ng-mouseover="popHover()" >try again?</button></p>
+      <p><button class="btn" ng-click="postFB()" ng-mouseover="popHover()" >Post Score</button></p>
     </div>
 
     <span class="time" ng-bind="time"></span>
     <div>
       <div id="board" ng-show="loggedIn">
         <div class="box">
-          <img class="characters" ng-src="{{characters.avatar}}">
-            <div id="ch" style="bottom:7px;"><button ng-click="answer(characters.choice[0])"class="btn">{{characters.choice[0]}}</button></div>
-            <div id="ch" style="bottom:55px;"><button ng-click="answer(characters.choice[1])" class="btn">{{characters.choice[1]}}</button></div>
+          <img class="characters" ng-src="{{characters.avatar}}" alt="มาเล่นทายตัวละครกันเถอะ,ฉันคือใครในเหล่าอนิเมะ,who am i?,who am i.io,ฉันคือใคร?" />>
+            <div id="ch" style="bottom:7px;"><button ng-mouseover="popHover()" ng-click="answer(characters.choice[0])"class="btn">{{characters.choice[0]}}</button></div>
+            <div id="ch" style="bottom:55px;"><button ng-mouseover="popHover()" ng-click="answer(characters.choice[1])" class="btn">{{characters.choice[1]}}</button></div>
         </div>
       </div>
     </div>
@@ -69,7 +71,7 @@
           <span>User Online ( <a>{{online}}</a> )</span>
         </div>
         <div class="demo-list-action mdl-list" id="scroll">
-          <div class="mdl-list__item" ng-repeat="datas in data | orderBy:'-score'" >
+          <div class="mdl-list__item" ng-repeat="datas in data | orderBy:'-score' | limitTo:6" >
             <span class="mdl-list__item-primary-content">
               <img class="material-icons mdl-list__item-avatar" ng-src="{{datas.avatar}}">
               <span><a href="http://fb.com/{{datas.id}}" target="_blank"> {{datas.name}} </a></span>
@@ -90,6 +92,27 @@
       js = d.createElement(s); js.id = id;
       js.src = "//connect.facebook.net/th_TH/sdk.js#xfbml=1&version=v2.6&appId=573083182871799";
       fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
+    }(document, 'script', 'facebook-jssdk'));
+
+    $(document).on("contextmenu",function(e){
+      e.preventDefault();
+    });
+    $(document).keydown(function(event){
+      if(event.keyCode==123)
+        return false;
+      else if(event.ctrlKey && event.shiftKey && event.keyCode==73)
+        return false;  //Prevent from ctrl+shift+i
+    });
+    </script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- ionic banner -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-7197999805164308"
+         data-ad-slot="5862004272"
+         data-ad-format="auto"></ins>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
   </body>
 </html>

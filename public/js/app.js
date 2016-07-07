@@ -50,19 +50,29 @@ app.controller('con', function($scope, Facebook ,mySocket/*,cfpLoadingBar*/,$htt
   mySocket.on('data', function(data){
       $scope.data = data;
   });
-
+  $scope.popHover = function(){
+    var audio = new Audio('./sound/Video_game_nintendo_wii_controller_unplug_BLASTWAVEFX_30422.mp3');
+    audio.volume = 0.1;
+    audio.play();
+  }
   $scope.getRandom = function(){
     $scope.count = Math.floor(Math.random() * $scope.json.length) + 0  ;
     $scope.characters = $scope.json[$scope.count];
     return $scope.characters;
   }
   $scope.startGame = function(){
+    var audio = new Audio('./sound/Electronic_Game_Blip.mp3');
+    audio.volume = 0.1;
+    audio.play();
     $scope.init();
     $('#press_start').fadeOut(500);
     $scope.true = $scope.getRandom();
     $scope.countTime();
   }
   $scope.goOn = function(){
+    var audio = new Audio('./sound/Gameboy_Game_Blip.mp3');
+    audio.volume = 0.5;
+    audio.play();
     $scope.json.splice($scope.count,1);
     $scope.true = $scope.getRandom();
     $timeout.cancel(stopOut);
@@ -71,10 +81,15 @@ app.controller('con', function($scope, Facebook ,mySocket/*,cfpLoadingBar*/,$htt
   }
 
   $scope.countTime = function(){
-    $scope.time = 10
+    $scope.time = 10;
     stopIn = $interval(function(){
-      if($scope.time>0)
-        $scope.time--
+      if($scope.time>0){
+        var audio = new Audio('./sound/Alarm_clock_beep_go_off_01_SFXBible_ss00805.mp3');
+        audio.volume = 0.1;
+        audio.play();
+        $scope.time--;
+      }
+
     },1000);
     stopOut = $timeout(function(){
       $scope.gameOver();
@@ -87,6 +102,9 @@ app.controller('con', function($scope, Facebook ,mySocket/*,cfpLoadingBar*/,$htt
     $scope.startGame();
   }
   $scope.gameOver = function(){
+    var audio = new Audio('./sound/Dig_Dug_game_over_AOS02031.mp3');
+    audio.volume = 0.5;
+    audio.play();
     $timeout.cancel(stopOut);
     $interval.cancel(stopIn);
 
@@ -96,7 +114,7 @@ app.controller('con', function($scope, Facebook ,mySocket/*,cfpLoadingBar*/,$htt
       $scope.score =0;
       var user = {"id":response.id,"name":response.name,"avatar":response.picture.data.url,"score":$scope.score};
       mySocket.emit('score', user);
-      $('#game_over').fadeIn(500);
+      $('#game_over').fadeIn(800);
     });
   }
   $scope.postFB = function(){
