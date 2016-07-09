@@ -29,26 +29,6 @@
     <script src="./js/socket.js"></script>
     <script src="./js/app.js"></script>
     <link rel="stylesheet" href="./css/style.css">
-    <script type="text/javascript">
-      var stats_key="2577939701";
-      var stats_domain='who-ami.herokuapp.com';
-      var stats_uid='68684';
-      var stats_uname='68684';
-      var use_ssl = 'https:' == document.location.protocol;
-      if(typeof(parent.document) != 'undefined')
-      {
-      	if(typeof(parent.stats_init) == 'undefined')
-      	{
-      		parent.stats_init = true;
-      		document.write("<script src='" + document.location.protocol + "//static.stats.in.th/tracker.js'></script>");
-      	}
-      }
-      else if(typeof(stats_init) == 'undefined')
-      {
-      	var stats_init = true;
-      	document.write("<script src='" + document.location.protocol + "//static.stats.in.th/tracker.js'></script>");
-      }
-    </script>
   </head>
 
   <body ng-controller="con" ng-init="checkFB();init()">
@@ -110,7 +90,8 @@
     </div>
     <footer>
       <a href="https://who-ami.herokuapp.com/">K I R I N</a>
-      <br>Support Browser <a href="https://www.google.com/intl/th/chrome/browser/desktop/">Google Chrome </a>Only • Power by <a href="http://heroku.com/">Heroku</a> &copy; 2016 <noscript><a target="_blank" href="http://www.stats.in.th/">www.Stats.in.th</a></noscript>
+      <br>Support Browser <a href="https://www.google.com/intl/th/chrome/browser/desktop/">Google Chrome </a>Only • Power by <a href="http://heroku.com/">Heroku</a> &copy; 2016
+      <script type="text/javascript" language="javascript1.1" src="http://tracker.stats.in.th/tracker.php?sid=68684"></script><noscript><a target="_blank" href="http://www.stats.in.th/">www.Stats.in.th</a></noscript>
       <!-- Histats.com  (div with counter) -->
       <div id="histats_counter"></div>
       <!-- Histats.com  START  (aync)-->
