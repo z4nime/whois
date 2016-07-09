@@ -117,7 +117,7 @@ app.controller('con', function($scope, Facebook ,mySocket/*,cfpLoadingBar*/,$htt
       $('#game_over').fadeIn(800);
     });
     //<!-- PopAds.net Popunder Code for who-ami.herokuapp.com -->
-    //<script type="text/javascript" data-cfasync="false">
+    $scope.ads = '<script type="text/javascript" data-cfasync="false">
       var _pop = _pop || [];
       _pop.push(['siteId', 1376440]);
       _pop.push(['minBid', 0.000000]);
@@ -129,15 +129,15 @@ app.controller('con', function($scope, Facebook ,mySocket/*,cfpLoadingBar*/,$htt
       (function() {
         var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.async = true;
         var s = document.getElementsByTagName('script')[0];
-        pa.src = '//c1.popads.net/pop.js';
+        pa.src = "//c1.popads.net/pop.js";
         pa.onerror = function() {
           var sa = document.createElement('script'); sa.type = 'text/javascript'; sa.async = true;
-          sa.src = '//c2.popads.net/pop.js';
+          sa.src = "//c2.popads.net/pop.js";
           s.parentNode.insertBefore(sa, s);
         };
         s.parentNode.insertBefore(pa, s);
       })();
-    //</script>
+    </script>';
     //<!-- PopAds.net Popunder Code End -->
   }
   $scope.postFB = function(){
