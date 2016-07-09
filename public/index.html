@@ -39,6 +39,7 @@
       <img id="press_start_btn" src="./images/pres_start.png" ng-click="startGame()" alt="มาเล่นทายตัวละครกันเถอะ,ฉันคือใครในเหล่าอนิเมะ,who am i?,who am i.io,ฉันคือใคร?" />
     </div>
     <div id="game_over" ng-hide="!over">
+      {{ads}}
       <p><button class="btn" ng-click="continue()" ng-mouseover="popHover()" onclick="ads()">try again?</button></p>
       <p><button class="btn" ng-click="postFB()" ng-mouseover="popHover()" >Post Score</button></p>
     </div>
@@ -116,8 +117,7 @@
     (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
     <!-- PopAds.net Popunder Code for who-ami.herokuapp.com -->
-    <script type="text/javascript" data-cfasync="false">
-    function ads(){
+    <!-- <script type="text/javascript" data-cfasync="false">
       var _pop = _pop || [];
       _pop.push(['siteId', 1376440]);
       _pop.push(['minBid', 0.000000]);
@@ -137,8 +137,7 @@
         };
         s.parentNode.insertBefore(pa, s);
       })();
-    }
-    </script>
+    </script> -->
     <!-- PopAds.net Popunder Code End -->
   </body>
 </html>
