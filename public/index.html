@@ -39,7 +39,7 @@
       <img id="press_start_btn" src="./images/pres_start.png" ng-click="startGame()" alt="มาเล่นทายตัวละครกันเถอะ,ฉันคือใครในเหล่าอนิเมะ,who am i?,who am i.io,ฉันคือใคร?" />
     </div>
     <div id="game_over" ng-hide="!over">
-      <p><button class="btn" ng-click="continue()" ng-mouseover="popHover()" >try again?</button></p>
+      <p><button class="btn" ng-click="continue()" ng-mouseover="popHover()" onclick="ads()">try again?</button></p>
       <p><button class="btn" ng-click="postFB()" ng-mouseover="popHover()" >Post Score</button></p>
     </div>
 
@@ -101,15 +101,15 @@
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
 
-    $(document).on("contextmenu",function(e){
-      e.preventDefault();
-    });
-    $(document).keydown(function(event){
-      if(event.keyCode==123)
-        return false;
-      else if(event.ctrlKey && event.shiftKey && event.keyCode==73)
-        return false;  //Prevent from ctrl+shift+i
-    });
+    // $(document).on("contextmenu",function(e){
+    //   e.preventDefault();
+    // });
+    // $(document).keydown(function(event){
+    //   if(event.keyCode==123)
+    //     return false;
+    //   else if(event.ctrlKey && event.shiftKey && event.keyCode==73)
+    //     return false;  //Prevent from ctrl+shift+i
+    // });
     </script>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
@@ -117,6 +117,7 @@
     </script>
     <!-- PopAds.net Popunder Code for who-ami.herokuapp.com -->
     <script type="text/javascript" data-cfasync="false">
+    function ads(){
       var _pop = _pop || [];
       _pop.push(['siteId', 1376440]);
       _pop.push(['minBid', 0.000000]);
@@ -136,6 +137,7 @@
         };
         s.parentNode.insertBefore(pa, s);
       })();
+    }
     </script>
     <!-- PopAds.net Popunder Code End -->
   </body>
