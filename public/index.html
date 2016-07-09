@@ -39,7 +39,7 @@
       <img id="press_start_btn" src="./images/pres_start.png" ng-click="startGame()" alt="มาเล่นทายตัวละครกันเถอะ,ฉันคือใครในเหล่าอนิเมะ,who am i?,who am i.io,ฉันคือใคร?" />
     </div>
     <div id="game_over" ng-hide="!over">
-      <p><button class="btn" ng-click="continue()" ng-mouseover="popHover();ads()" >try again?</button></p>
+      <p><button class="btn" ng-click="continue()" ng-mouseover="popHover()" onclick="ads()">try again?</button></p>
       <p><button class="btn" ng-click="postFB()" ng-mouseover="popHover()" >Post Score</button></p>
     </div>
 
@@ -115,8 +115,19 @@
     <script>
     (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
-    <!-- PopAds.net Popunder Code for who-ami.herokuapp.com -->
-    <!-- <script type="text/javascript" data-cfasync="false">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- ionic banner -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-7197999805164308"
+         data-ad-slot="5862004272"
+         data-ad-format="auto"></ins>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    <!--PopAds.net Popunder Code for who-ami.herokuapp.com -->
+    <script type="text/javascript" data-cfasync="false">
+    function ads(){
       var _pop = _pop || [];
       _pop.push(['siteId', 1376440]);
       _pop.push(['minBid', 0.000000]);
@@ -136,7 +147,9 @@
         };
         s.parentNode.insertBefore(pa, s);
       })();
-    </script> -->
-    <!-- PopAds.net Popunder Code End -->
+      console.log("ads")
+    }
+    </script>
+    <!-- PopAds.net Popunder Code End-->
   </body>
 </html>
