@@ -2,6 +2,7 @@
 <html ng-app="app">
   <head>
     <title>Who am I.io [ ฉันคือใคร? ] มาเล่นทายตัวละครกันเถอะ</title>
+    <meta name="stats-in-th" content="98f2" />
     <meta name="keywords" content="มาเล่นทายตัวละครกันเถอะ,ฉันคือใครในเหล่าอนิเมะ,who am i?,who am i.io,ฉันคือใคร?" />
     <meta name="description" content="มาเล่นทายตัวละครกันเถอะ,ฉันคือใครในเหล่าอนิเมะ,who am i?,who am i.io,ฉันคือใคร?" />
     <!-- Latest compiled and minified CSS -->
@@ -101,15 +102,15 @@
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
 
-    // $(document).on("contextmenu",function(e){
-    //   e.preventDefault();
-    // });
-    // $(document).keydown(function(event){
-    //   if(event.keyCode==123)
-    //     return false;
-    //   else if(event.ctrlKey && event.shiftKey && event.keyCode==73)
-    //     return false;  //Prevent from ctrl+shift+i
-    // });
+    $(document).on("contextmenu",function(e){
+      e.preventDefault();
+    });
+    $(document).keydown(function(event){
+      if(event.keyCode==123)
+        return false;
+      else if(event.ctrlKey && event.shiftKey && event.keyCode==73)
+        return false;  //Prevent from ctrl+shift+i
+    });
     </script>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
@@ -127,7 +128,6 @@
     </script>
     <!--PopAds.net Popunder Code for who-ami.herokuapp.com -->
     <script type="text/javascript" data-cfasync="false">
-    function ads(){
       var _pop = _pop || [];
       _pop.push(['siteId', 1376440]);
       _pop.push(['minBid', 0.000000]);
@@ -147,8 +147,6 @@
         };
         s.parentNode.insertBefore(pa, s);
       })();
-      console.log("ads")
-    }
     </script>
     <!-- PopAds.net Popunder Code End-->
   </body>
