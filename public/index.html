@@ -39,8 +39,7 @@
       <img id="press_start_btn" src="./images/pres_start.png" ng-click="startGame()" alt="มาเล่นทายตัวละครกันเถอะ,ฉันคือใครในเหล่าอนิเมะ,who am i?,who am i.io,ฉันคือใคร?" />
     </div>
     <div id="game_over" ng-hide="!over">
-      {{ads}}
-      <p><button class="btn" ng-click="continue()" ng-mouseover="popHover()" onclick="ads()">try again?</button></p>
+      <p><button class="btn" ng-click="continue()" ng-mouseover="popHover();ads()" >try again?</button></p>
       <p><button class="btn" ng-click="postFB()" ng-mouseover="popHover()" >Post Score</button></p>
     </div>
 
