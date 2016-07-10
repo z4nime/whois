@@ -66,9 +66,10 @@
 
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<input type="text" class="form-control" ng-model="search" placeholder="search characters anime total ( {{datas.length }} )">
-		<div ng-repeat="data in datas | filter:search" style="float:left;text-align:center;">
+		<div ng-repeat="data in datas | filter:search " style="float:left;text-align:center;">
 			<img style="width:120px;margin:5px;" ng-src="{{data.avatar}}">
 			<p>{{data.name}}</p>
+      <p><button type="button" class="btn btn-large btn-block btn-danger" ng-click="del($index)">delete</button>
 		</div>
 	</div>
 </body>

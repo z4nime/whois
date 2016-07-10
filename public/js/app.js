@@ -20,7 +20,6 @@ app.controller('upload',function($scope,$http){
   }
   $scope.submit = function(url,name,ch,ch2){
     $scope.datas.push({"avatar":url,"name":name,"choice":[ch,ch2]});
-    $scope.name ="";
     $scope.url="";
     $scope.ch="";
     $scope.ch2="";
@@ -32,7 +31,9 @@ app.controller('upload',function($scope,$http){
     }, function errorCallback(response) {
 
     });
-
+  }
+  $scope.del = function(index){
+    $scope.datas.splice(index,1);
   }
 })
 app.controller('con', function($scope, Facebook ,mySocket/*,cfpLoadingBar*/,$http,$interval,$timeout) {
